@@ -18,6 +18,7 @@ class FixedWidthFormatParser(object):
         if data:
             leitura = leitura.strip()
             return leitura and datetime.datetime.strptime(leitura, '%d%m%y').date()
+
         string = re.compile(r"^[x|X]\((?P<string>\d+)\)$").match(configuracao)
         if string:
             return leitura.strip()
@@ -59,7 +60,13 @@ class FixedWidthFormatParser(object):
         data = re.compile(r"[D|d]{2}[m|M]{2}[A|a]{2}$").match(configuracao)
         if data:
             return dado and dado.strftime('%d%m%y') or '000000'
-        raise AttributeError('Configuracao errada! opcoes: 9(\d+), 9(\d+)v9(\d+), x(\d+), DDMMAA, tipo passado: %s' % configuracao)
+
+        data = re.compile(r"[A|a]{4}[m|M]{2}[D|d]{2}$").match(configuracao)
+        if data:
+            return dado and dado.strftime('%Y%m%d') or '00000000'
+
+        raise AttributeError('Configuracao errada! opcoes: 9(\d+), 9(\d+)v9(\d+), x(\d+), DDMMAA ou AAAAMMDD, tipo passado: %s' % configuracao)
+
 
     def _atualiza_dicionario(self, atributo, leitura):
         chave, configuracao = atributo
@@ -91,6 +98,9 @@ class FixedWidthFormatParser(object):
         data = re.compile(r"[D|d]{2}[m|M]{2}[A|a]{2}$").match(configuracao)
         if data:
             return 6
+        data = re.compile(r'[A|a]{4}[M|m]{2}[D|d]{2}$').match(configuracao)
+        if data:
+            return 8
         decimal = re.compile(r"^9\((?P<inteiro>\d+)\)[v|V]9\((?P<decimal>\d+)\)$").match(configuracao)
         if decimal:
             return int(decimal.group('inteiro')) + int(decimal.group('decimal'))

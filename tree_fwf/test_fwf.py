@@ -80,10 +80,16 @@ class FixedWidthFormatTest(TestCase):
         with self.assertRaisesRegexp(AttributeError, r"Configuracao errada! opcoes: "):
             self.manager._parse_leitura('1234', 'configuracao inexistente')
 
-    def test_quantidade_de_caracteres_do_atributo_deve_retornar_valor_correto_para_data(self):
+    def test_quantidade_de_caracteres_do_atributo_deve_retornar_valor_correto_para_data_format_DDMMAA(self):
         resposta = self.manager._quantidade_de_caracteres_do_atributo(('teste' , 'DDMMAA'))
         esperado = 6
         self.assertEquals(resposta,esperado)
+
+    def test_quantidade_de_caracteres_do_atributo_deve_retornar_valor_correto_para_data_format_AAAAMMDD(self):
+        resposta = self.manager._quantidade_de_caracteres_do_atributo(('teste' , 'AAAAMMDD'))
+        esperado = 8
+        self.assertEquals(resposta,esperado)
+
 
     def test_quantidade_de_caracteres_do_atributo_deve_retornar_valor_correto(self):
         resposta = self.manager._quantidade_de_caracteres_do_atributo(('teste' , 'X(05)'))
@@ -145,9 +151,14 @@ class FixedWidthFormatTest(TestCase):
         esperado = '000000001025'
         self.assertEquals(resposta, esperado)
 
-    def test_string_escrita_deve_retornar_data_correta_para_string(self):
+    def test_string_escrita_deve_retornar_data_correta_para_string_format_DDMMAA(self):
         resposta = self.manager._string_escrita({'teste' : datetime.date(day=1, month=2, year=2012)}, ('teste', 'DDMMAA'))
         esperado = '010212'
+        self.assertEquals(resposta, esperado)
+
+    def test_string_escrita_deve_retornar_data_correta_para_string_format_AAAAMMDD(self):
+        resposta = self.manager._string_escrita({'teste' : datetime.date(day=1, month=2, year=2012)}, ('teste', 'AAAAMMDD'))
+        esperado = '20120201'
         self.assertEquals(resposta, esperado)
 
     def test_string_escrita_deve_retornar_string_correta_para_string_sem_valor(self):
