@@ -46,6 +46,13 @@ class FixedWidthFormatTest(TestCase):
         esperado = '0'
         self.assertEquals(resposta, esperado)
 
+    def test_parse_leitura_deve_retornar_date_formato_YYYYMMDD(self):
+        resposta_lower = self.manager._parse_leitura('20140711', 'aaaammdd')
+        resposta_upper = self.manager._parse_leitura('20140711', 'AAAAMMDD')
+        esperado = datetime.date(2014, 07, 11)
+        self.assertEqual(resposta_lower, esperado)
+        self.assertEqual(resposta_upper, esperado)
+
     def teste_parse_leitura_deve_retornar_date(self):
         resposta_lower = self.manager._parse_leitura('011120', 'ddmmaa')
         resposta_upper = self.manager._parse_leitura('011120', 'DDMMAA')

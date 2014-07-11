@@ -19,6 +19,11 @@ class FixedWidthFormatParser(object):
             leitura = leitura.strip()
             return leitura and datetime.datetime.strptime(leitura, '%d%m%y').date()
 
+        data = re.compile(r"[A|a]{4}[m|M]{2}[D|d]{2}$").match(configuracao)
+        if data:
+            leitura = leitura.strip()
+            return leitura and datetime.datetime.strptime(leitura, '%Y%m%d').date()
+
         string = re.compile(r"^[x|X]\((?P<string>\d+)\)$").match(configuracao)
         if string:
             return leitura.strip()
