@@ -1,14 +1,18 @@
-# Fixed Width Format Parser
+Fixed Width Format Parser
+=========================
 
-## Instalação
+Instalação
+=======
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-$ pip install git+git@bitbucket.org:agenciatree/fixedwidthformatparser.git#egg=tree_fwf
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## Utilização
+.. sourcecode:: bash
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>> from tree_fwf import FixedWidthFormatParser
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    $ pip install git+git@bitbucket.org:agenciatree/fixedwidthformatparser.git#egg=tree_fwf
 
+
+Utilização
+=======
+
+.. sourcecode:: python
+
+    from tree_fwf import FixedWidthFormatParser
